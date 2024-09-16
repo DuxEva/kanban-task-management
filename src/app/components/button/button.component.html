@@ -1,0 +1,10 @@
+<button
+  class="border-none font-semibold cursor-pointer flex gap-3 items-center"
+  [ngClass]="[customStyle]"
+  data-testid="button"
+>
+  <span>
+    <img src="{{ icon }}" alt="" />
+  </span>
+  <span>{{ text }}</span>
+</button>
