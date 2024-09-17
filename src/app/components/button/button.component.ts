@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() text: string = '';
   @Input() customStyle: string = '';
+  @Input() customTextStyle: string = '';
   @Input() icon?: string;
 }
