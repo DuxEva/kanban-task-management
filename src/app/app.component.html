@@ -1,4 +1,6 @@
 <div class="h-screen w-screen bg-grey-3">
-  <app-navbar />
-  <app-sidebar />
+  <app-navbar
+    [isDarkMode]="darkMode"
+   />
+  <app-sidebar (darkModeChange)="changeDarkMode($event)" />
 </div>

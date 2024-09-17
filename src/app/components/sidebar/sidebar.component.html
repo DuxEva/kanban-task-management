@@ -1,30 +1,70 @@
 <aside
-  class="fixed top-0 left-0 h-screen w-60 bg-white z-10 border-r-2 border-r-grey-2"
+  class="fixed top-0 left-0 h-screen w-60 bg-white dark:bg-black-2 z-10 border-r-2 border-r-grey-2 dark:border-black-3 transition-all duration-300"
 >
   <div class="h-20 flex justify-center items-center">
-    <img src="/assets/logo-dark.svg" alt="Logo" />
+    <img
+      [src]="darkMode ? '/assets/logo-light.svg' : '/assets/logo-dark.svg'"
+      alt="Logo"
+    />
   </div>
-  <h1 class="text-grey-1 mt-5 pl-8">ALL BOARDS (3)</h1>
-  <div class="grid grid-cols-1 gap-1 mt-5">
-    <app-button
-      icon="/assets/icon-board-white.svg"
-      text="Platform Launch"
-      customStyle=" py-3 px-5 rounded-r-full text-white bg-purple-1"
-    />
-    <app-button
-      icon="/assets/icon-board.svg"
-      text="Marketing Plan"
-      customStyle=" py-3 px-5 text-grey-1"
-    />
-    <app-button
-      icon="/assets/icon-board.svg"
-      text="Roadmap"
-      customStyle=" py-3 px-5 text-grey-1"
-    />
-    <app-button
-      icon="/assets/icon-board.svg"
-      text="+ Create New Board"
-      customStyle=" py-3 px-5 text-purple-1 text-lg"
-    />
+  <div class="flex flex-col justify-between h-[90%] pb-14">
+    <div>
+      <h1 class="text-grey-1 mt-5 pl-8">ALL BOARDS (3)</h1>
+      <div class="grid grid-cols-1 gap-1 mt-5">
+        <app-button
+          icon="/assets/icon-board-white.svg"
+          text="Platform Launch"
+          customStyle=" py-3 px-5 rounded-r-full text-white bg-purple-1"
+        />
+        <app-button
+          icon="/assets/icon-board.svg"
+          text="Marketing Plan"
+          customStyle=" py-3 px-5 text-grey-1"
+        />
+        <app-button
+          icon="/assets/icon-board.svg"
+          text="Roadmap"
+          customStyle=" py-3 px-5 text-grey-1"
+        />
+        <app-button
+          icon="/assets/icon-board.svg"
+          text="+ Create New Board"
+          customStyle=" py-3 px-5 text-purple-1 text-lg"
+        />
+      </div>
+    </div>
+    <div class="w-[95%] mx-auto">
+      <div
+        class="flex py-3 items-center justify-center gap-5 bg-grey-3 dark:bg-black-1 rounded-md"
+      >
+        <div>
+          <img src="/assets/icon-light-theme.svg" alt="" />
+        </div>
+        <button
+          class="w-[40px] rounded-full bg-purple-1 h-5 px-[1px]"
+          (click)="toggleDarkMode()"
+        >
+          <div
+            class="w-4 h-4 bg-white rounded-full transform transition-all duration-300"
+            [ngClass]="{
+              'translate-x-0': !darkMode,
+              'translate-x-[1.32rem]': darkMode,
+            }"
+          ></div>
+        </button>
+        <div>
+          <img src="/assets/icon-dark-theme.svg" alt="" />
+        </div>
+      </div>
+      <div
+        class="bg-grey-3 dark:bg-black-1 flex justify-center mt-5 rounded-md"
+      >
+        <app-button
+          icon="/assets/icon-hide-sidebar.svg"
+          text="Hide Sidebar"
+          customStyle=" py-2 px- text-grey-1 text-lg"
+        />
+      </div>
+    </div>
   </div>
 </aside>
