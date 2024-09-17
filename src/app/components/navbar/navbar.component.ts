@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnChanges {
-  @Input() isDarkMode = false;
+  @Input() isDarkMode = true;
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnChanges() {

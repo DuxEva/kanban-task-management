@@ -1,0 +1,20 @@
+<div
+  class="mt-20 h-[90.7vh] dark:bg-black-2 transition-all duration-300"
+  [ngClass]="{
+    'ml-60 w-[84.35vw]': isSidebarOpen,
+    'ml-0 w-screen': !isSidebarOpen
+  }"
+>
+  <div class="flex items-center justify-center w-full h-full">
+    <div class="flex flex-col items-center">
+      <p class="text-center text-grey-1">
+        This board is empty. Create a new column to get started.
+      </p>
+      <app-button
+        icon="/assets/icon-add-task-mobile.svg"
+        text="Add New Task"
+        customStyle="bg-purple-1 hover:bg-purple-1 transilation-all duration-300 rounded-full text-white py-3 px-5 mt-5"
+      />
+    </div>
+  </div>
+</div>

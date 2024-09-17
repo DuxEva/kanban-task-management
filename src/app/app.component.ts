@@ -9,7 +9,12 @@ export class AppComponent {
   title = 'kanban-task-management';
 
   darkMode = false;
+  isSidebarOpen = true;
   changeDarkMode(darkMode: boolean) {
     this.darkMode = darkMode;
+  }
+
+  toggleSidebar(isOpen: boolean) {
+    this.isSidebarOpen = isOpen;
   }
 }

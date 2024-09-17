@@ -1,6 +1,10 @@
-<div class="h-screen w-screen bg-grey-3">
-  <app-navbar
-    [isDarkMode]="darkMode"
-   />
-  <app-sidebar (darkModeChange)="changeDarkMode($event)" />
+<div class="w-screen bg-grey-3 relative">
+  <app-navbar [isDarkMode]="darkMode" />
+  <app-sidebar
+    (darkModeChange)="changeDarkMode($event)"
+    (onSidebarToggle)="toggleSidebar($event)"
+  />
+  <div class="flex w-screen">
+    <app-home [isSidebarOpen]="isSidebarOpen" />
+  </div>
 </div>
