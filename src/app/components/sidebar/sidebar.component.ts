@@ -15,6 +15,7 @@ import {
 })
 export class SidebarComponent {
   darkMode = false;
+  isSidebarOpen = true;
   @Output() darkModeChange = new EventEmitter<boolean>();
 
   constructor(
@@ -55,5 +56,10 @@ export class SidebarComponent {
 
   onDarkModeChange() {
     this.darkModeChange.emit(this.darkMode);
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    console.log('clicked', this.isSidebarOpen);
   }
 }
