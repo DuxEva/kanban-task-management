@@ -61,7 +61,6 @@ export class SidebarComponent {
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
-    console.log(this.isSidebarOpen);
     this.onSidebarToggle.emit(this.isSidebarOpen);
   }
 }

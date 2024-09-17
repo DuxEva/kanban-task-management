@@ -1,26 +1,42 @@
 <header
-  class="fixed justify-between top-0 left-0 h-20 flex items-center dark:bg-black-2 bg-white border-b-2 w-full border-b-grey-2 dark:border-b-black-3 px-10 transition-all duration-300"
+  class="fixed justify-between top-0 left-0 h-20 flex items-center dark:bg-black-2 bg-white border-b-2 w-full border-b-grey-2 dark:border-b-black-3 max-sm:px-3 px-10 transition-all duration-300"
 >
-  <div class="flex gap-10 h-full">
+  <div class="flex max-sm:gap-5 gap-10 h-full">
     <div class="flex h-full items-center">
       <img
+        class="max-sm:hidden"
         [src]="isDarkMode ? '/assets/logo-light.svg' : '/assets/logo-dark.svg'"
         alt="Logo"
       />
+      <img class="sm:hidden" src="/assets/logo-mobile.svg" alt="Logo" />
     </div>
-    <div class="h-full w-[2px] bg-grey-2 dark:bg-black-3"></div>
-    <div class="h-full flex items-center">
-      <h1 class="text-black-1 dark:text-white text-2xl font-bold">
+    <div class="h-full w-[2px] bg-grey-2 dark:bg-black-3 max-sm:hidden"></div>
+    <div class="h-full flex items-center gap-2 max-sm:hidden">
+      <h1
+        class="text-black-1 dark:text-white text-2xl max-md:text-lg font-bold"
+      >
         Platform Launch
       </h1>
     </div>
+    <button class="h-full flex items-center gap-2 sm:hidden">
+      <h1
+        class="text-black-1 dark:text-white text-2xl max-md:text-lg font-bold"
+      >
+        Platform Launch
+      </h1>
+      <img
+        class="sm:hidden h-3"
+        src="/assets/icon-chevron-down.svg"
+        alt="Logo"
+      />
+    </button>
   </div>
   <div class="flex items-center gap-8">
     <app-button
       icon="/assets/icon-add-task-mobile.svg"
       text="Add New Task"
-      customStyle="bg-purple-1 hover:bg-purple-1 transilation-all duration-300 rounded-full text-white py-3 px-5"
-      customTextStyle="max-md:hidden"
+      customStyle="bg-purple-1 hover:bg-purple-1 transilation-all duration-300 rounded-full text-white py-3 px-5 transilation-all duration-300"
+      customTextStyle="max-md:hidden transilation-all duration-300"
     />
     <app-button icon="/assets/icon-vertical-ellipsis.svg" customStyle="" />
   </div>
