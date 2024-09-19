@@ -1,0 +1,60 @@
+<form [formGroup]="boardForm" (ngSubmit)="onSubmit()" class="w-full flex flex-col gap-4 py-2">
+  <h2 class="font-bold text-xl text-black dark:text-lightGray">Add New Board</h2>
+
+  <div class="mt-4 flex flex-col gap-3 group">
+    <label for="board-name" class="font-semibold text-sm text-mediumGray">Board Name</label>
+    <input
+      type="text"
+      id="board-name"
+      formControlName="name"
+      placeholder="e.g. Web Design"
+      class="w-full px-4 p-3 rounded-lg border-2 dark:bg-darkGray border-gray-300 dark:border-lightGray/30 font-medium dark:text-lightGray group-hover:border-mediumGray"
+    />
+    <div
+      *ngIf="boardForm.get('name')?.invalid && boardForm.get('name')?.touched"
+      class="text-red -mt-2 text-xs"
+    >
+      Board name is required and must be at least 3 characters long.
+    </div>
+  </div>
+
+  <div class="mt-4 flex flex-col gap-3">
+    <label class="font-semibold text-sm text-mediumGray">Columns</label>
+
+    <div formArrayName="columns" class="flex flex-col gap-3">
+      <div
+        *ngFor="let column of columns.controls; let i = index"
+        [formGroupName]="i"
+        class="flex gap-2 items-center border-2 border-gray-300 dark:border-lightGray/30 p-1 rounded-lg group hover:border-mediumGray"
+      >
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Web Design"
+          class="w-full px-4 p-3 dark:bg-darkGray rounded-lg font-medium dark:text-lightGray outline-none active:outline-none"
+        />
+        <span
+          class="material-symbols-outlined duration-150 text-mediumGray dark:text-lightGray active:bg-purple active:text-white p-3 rounded-md hover:rotate-90 cursor-pointer group-hover:bg-lightPurple/20"
+          (click)="removeColumn(i)"
+        >
+          close
+        </span>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      (click)="addColumn()"
+      class="w-full py-4 items-center bg-lightPurple/20 font-medium text-purple rounded-full"
+    >
+      + Add New Column
+    </button>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full py-4 items-center bg-purple font-medium text-lightGray rounded-full"
+  >
+    Create New Board
+  </button>
+</form>

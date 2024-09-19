@@ -18,6 +18,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { TaskEffects } from './store/task.effect';
 import { ColumnComponent } from './components/column/column.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
+import { CreateBoardComponent } from './components/create-board/create-board.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,13 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
     HomeComponent,
     ColumnComponent,
     TaskCardComponent,
+    CreateBoardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ tasks: taskReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

@@ -12,23 +12,25 @@
   </div>
   <div class="flex flex-col justify-between h-[90%] pb-14">
     <div>
-      <h1 class="text-grey-1 mt-5 pl-8">ALL BOARDS (3)</h1>
+      <h1 class="text-grey-1 mt-5 pl-8">ALL BOARDS ({{ boards.length }})</h1>
       <div class="grid grid-cols-1 gap-1 mt-5">
         <app-button
-          icon="/assets/icon-board-white.svg"
-          text="Platform Launch"
-          customStyle=" py-3 px-5 rounded-r-full text-white bg-purple-1"
+          *ngFor="let board of boards"
+          [icon]="
+            board.name === selectedBoard.name
+              ? '/assets/icon-board-white.svg'
+              : '/assets/icon-board.svg'
+          "
+          text="{{ board.name }}"
+          customStyle="py-3 px-5   w-full"
+          [ngClass]="{
+            'bg-purple-1 rounded-r-full text-white':
+              board.name === selectedBoard.name,
+            'text-grey-1': board.name !== selectedBoard.name
+          }"
+          (click)="selectBoard(board)"
         />
-        <app-button
-          icon="/assets/icon-board.svg"
-          text="Marketing Plan"
-          customStyle=" py-3 px-5 text-grey-1"
-        />
-        <app-button
-          icon="/assets/icon-board.svg"
-          text="Roadmap"
-          customStyle=" py-3 px-5 text-grey-1"
-        />
+
         <app-button
           icon="/assets/icon-board-purple.svg"
           text="+ Create New Board"

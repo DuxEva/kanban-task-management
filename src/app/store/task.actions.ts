@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { Board } from '../models';
 
-export const addTask = createAction(
+export const addBoard = createAction(
   '[Task] Add Task',
-  props<{ task: string }>()
+  props<{ board: Board }>()
 );
 
 export const removeTask = createAction(

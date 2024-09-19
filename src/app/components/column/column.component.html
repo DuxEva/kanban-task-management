@@ -1,15 +1,29 @@
 <div
-  class="max-w-[350px] lg:max-w-[390px] flex flex-col justify-start items-start gap-5 duration-100 border border-red-1"
+  class="w-[350px] lg:w-[370px] flex flex-col justify-start items-start gap-5 duration-100 border border-red-1"
 >
   <div class="flex items-center gap-2">
     <div
       class="w-4 h-4 rounded-full"
       [ngClass]="{
-      'bg-green-1': column.name.toLowerCase() === 'done',
-      'bg-green-2': column.name.toLowerCase() === 'todo',
-      'bg-purple-1': column.name.toLowerCase() === 'doing',
-    }"
+        'bg-green-1':
+          column.name.toLowerCase() === 'done' ||
+          column.name.toLowerCase() === 'now',
+        'bg-green-2':
+          column.name.toLowerCase() === 'todo' ||
+          column.name.toLowerCase() === 'next',
+        'bg-purple-1':
+          column.name.toLowerCase() === 'doing' ||
+          column.name.toLowerCase() === 'later',
+        'bg-red-1':
+          column.name.toLowerCase() !== 'done' &&
+          column.name.toLowerCase() !== 'now' &&
+          column.name.toLowerCase() !== 'todo' &&
+          column.name.toLowerCase() !== 'next' &&
+          column.name.toLowerCase() !== 'doing' &&
+          column.name.toLowerCase() !== 'later'
+      }"
     ></div>
+
     <p class="font-bold text-grey-1">
       {{ column.name }}({{ column.tasks.length }})
     </p>

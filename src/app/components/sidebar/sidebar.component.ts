@@ -7,6 +7,11 @@ import {
   PLATFORM_ID,
   Renderer2,
 } from '@angular/core';
+import { AppState, Board } from '../../models';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as taskSelectors from '../../store/task.selectors';
+import * as taskActions from '../../store/task.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,15 +24,35 @@ export class SidebarComponent {
   @Output() onSidebarToggle = new EventEmitter<boolean>();
   @Output() darkModeChange = new EventEmitter<boolean>();
 
+  boards!: Board[];
+  selectedBoard!: Board;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public store: Store<AppState>
   ) {}
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.applyThemePreference();
     }
+
+    this.store.pipe(select(taskSelectors.selectBoards)).subscribe((boards) => {
+      this.boards = boards;
+    });
+
+    this.store
+      .pipe(select(taskSelectors.selectActivatedBoard))
+      .subscribe((board) => {
+        this.selectedBoard = board;
+      });
+  }
+
+  selectBoard(board: Board) {
+    this.store.dispatch(
+      taskActions.changeActivateddBoard({ title: board.name })
+    );
   }
 
   applyThemePreference() {
