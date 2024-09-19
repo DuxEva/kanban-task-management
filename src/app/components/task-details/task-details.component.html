@@ -1,4 +1,4 @@
-<div class="w-full flex flex-col gap-4 p-2">
+<div class="w-full flex flex-col gap-4 p-2" [formGroup]="taskForm">
   <div class="w-full flex gap-1 items-center">
     <h2 class="w-full font-bold text-xl text-black-1 dark:text-white">
       Research pricing points of various competitors and trial different
@@ -36,6 +36,7 @@
     </div>
   </div>
 
+  <!-- Select field wrapped in a form group -->
   <div class="mt-6 flex flex-col gap-3 group">
     <label
       for="board-name"

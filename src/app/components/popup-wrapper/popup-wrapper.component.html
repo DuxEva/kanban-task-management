@@ -21,7 +21,8 @@
       class="absolute z-20 w-[92%] md:w-[60%] lg:w-[50%] xl:w-[40%] bg-white dark:bg-black-3 p-6 rounded-3xl transition-all duration-300 ease-in-out shadow-md"
     >
       <app-create-board *ngIf="popupType === 'createTask'"></app-create-board>
-      <!-- <app-task-details></app-task-details> -->
+      <app-create-board *ngIf="popupType === 'createBoard'"></app-create-board>
+      <app-task-details *ngIf="popupType === 'taskDetails'"></app-task-details>
     </div>
   </div>
 </div>

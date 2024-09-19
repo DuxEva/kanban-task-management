@@ -88,4 +88,8 @@ export class SidebarComponent {
     this.isSidebarOpen = !this.isSidebarOpen;
     this.onSidebarToggle.emit(this.isSidebarOpen);
   }
+
+  onCreateNewBoard(): void {
+    this.store.dispatch(taskActions.showModel({ showModel: 'createBoard' }));
+  }
 }

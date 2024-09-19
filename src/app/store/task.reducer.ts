@@ -33,27 +33,12 @@ export const taskReducer = createReducer(
     },
   })),
 
+  on(taskActions.addBoard, (state, { board }) => ({
+    ...state,
+    boards: [...state.boards, board],
+  })),
+
   // OPEN POPUPS
-
-  on(taskActions.openEditTaskModel, (state, { isEditTaskOpen }) => ({
-    ...state,
-    isEditTaskOpen,
-  })),
-
-  on(taskActions.openCreateBoardModel, (state, { isCreateBoardOpen }) => ({
-    ...state,
-    isCreateBoardOpen,
-  })),
-
-  on(taskActions.openDeleteBoardModel, (state, { isDeleteBoardOpen }) => ({
-    ...state,
-    isDeleteBoardOpen,
-  })),
-
-  on(taskActions.openDeleteTaskModel, (state, { isDeleteTaskOpen }) => ({
-    ...state,
-    isDeleteTaskOpen,
-  })),
 
   on(taskActions.showModel, (state, { showModel }) => ({
     ...state,

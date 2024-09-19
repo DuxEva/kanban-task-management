@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Board } from '../models';
 
 export const addBoard = createAction(
-  '[Task] Add Task',
+  '[Sidebar Component] Add Board',
   props<{ board: Board }>()
 );
 

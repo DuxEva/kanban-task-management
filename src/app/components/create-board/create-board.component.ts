@@ -51,8 +51,9 @@ export class CreateBoardComponent {
         columns: this.boardForm.value.columns,
       };
       this.store.dispatch(taskActions.addBoard({ board }));
+      this.store.dispatch(taskActions.showModel({ showModel: '' }));
+    } else {
+      console.log('Please fill all the required fields');
     }
   }
-
-  createBoard(): void {}
 }
