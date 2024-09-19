@@ -1,60 +1,61 @@
-<form [formGroup]="boardForm" (ngSubmit)="onSubmit()" class="w-full flex flex-col gap-4 py-2">
-  <h2 class="font-bold text-xl text-black dark:text-lightGray">Add New Board</h2>
+<form
+  [formGroup]="boardForm"
+  (ngSubmit)="onSubmit()"
+  class="w-full flex flex-col gap-4 py-2"
+>
+  <h2 class="font-bold text-xl text-black-1 dark:text-white">Add New Board</h2>
 
   <div class="mt-4 flex flex-col gap-3 group">
-    <label for="board-name" class="font-semibold text-sm text-mediumGray">Board Name</label>
+    <label for="board-name" class="font-semibold text-grey-1 dark:text-white"
+      >Name</label
+    >
     <input
       type="text"
       id="board-name"
       formControlName="name"
       placeholder="e.g. Web Design"
-      class="w-full px-4 p-3 rounded-lg border-2 dark:bg-darkGray border-gray-300 dark:border-lightGray/30 font-medium dark:text-lightGray group-hover:border-mediumGray"
+      class="w-full px-4 p-3 rounded-lg border dark:bg-black-3 border-grey-1 font-medium dark:text-white outline-none"
     />
     <div
       *ngIf="boardForm.get('name')?.invalid && boardForm.get('name')?.touched"
-      class="text-red -mt-2 text-xs"
+      class="text-red-2 -mt-1 text-xs"
     >
-      Board name is required and must be at least 3 characters long.
+      name is required and must be at least 2 characters.
     </div>
   </div>
 
   <div class="mt-4 flex flex-col gap-3">
-    <label class="font-semibold text-sm text-mediumGray">Columns</label>
+    <label class="font-semibold text-grey-1 dark:text-white">Columns</label>
 
     <div formArrayName="columns" class="flex flex-col gap-3">
       <div
         *ngFor="let column of columns.controls; let i = index"
         [formGroupName]="i"
-        class="flex gap-2 items-center border-2 border-gray-300 dark:border-lightGray/30 p-1 rounded-lg group hover:border-mediumGray"
+        class="flex gap-2 items-center dark:border-lightGray/30 p-1 rounded-lg group hover:border-mediumGray"
       >
         <input
           type="text"
           formControlName="name"
           placeholder="e.g. Web Design"
-          class="w-full px-4 p-3 dark:bg-darkGray rounded-lg font-medium dark:text-lightGray outline-none active:outline-none"
+          class="w-full px-4 p-3 border border-grey-1 dark:bg-black-3 rounded-lg font-medium dark:text-white outline-none"
         />
-        <span
-          class="material-symbols-outlined duration-150 text-mediumGray dark:text-lightGray active:bg-purple active:text-white p-3 rounded-md hover:rotate-90 cursor-pointer group-hover:bg-lightPurple/20"
-          (click)="removeColumn(i)"
-        >
-          close
+        <span class="p-3 cursor-pointer" (click)="deleteColumn(i)">
+          <img src="/assets/icon-cross.svg" alt="" />
         </span>
       </div>
     </div>
 
-    <button
-      type="button"
+    <app-button
       (click)="addColumn()"
-      class="w-full py-4 items-center bg-lightPurple/20 font-medium text-purple rounded-full"
-    >
-      + Add New Column
-    </button>
+      text="+ Add New Column"
+      customStyle="bg-grey-2 dark:bg-white font-medium inline-block rounded-full text-purple-1 py-3 px-5 w-full"
+      customTextStyle="w-full text-center"
+    />
   </div>
 
-  <button
-    type="submit"
-    class="w-full py-4 items-center bg-purple font-medium text-lightGray rounded-full"
-  >
-    Create New Board
-  </button>
+  <app-button
+    text="Create New Board"
+    customStyle="bg-purple-1 font-medium text-white rounded-full font-medium inline-block rounded-full py-3 px-5 w-full mt-2"
+    customTextStyle="w-full text-center"
+  />
 </form>

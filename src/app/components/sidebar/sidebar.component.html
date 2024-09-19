@@ -22,9 +22,9 @@
               : '/assets/icon-board.svg'
           "
           text="{{ board.name }}"
-          customStyle="py-3 px-5   w-full"
+          customStyle="py-3 px-5 "
           [ngClass]="{
-            'bg-purple-1 rounded-r-full text-white':
+            'bg-purple-1 rounded-r-full text-white w-[95%]':
               board.name === selectedBoard.name,
             'text-grey-1': board.name !== selectedBoard.name
           }"

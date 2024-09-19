@@ -20,6 +20,8 @@ import { ColumnComponent } from './components/column/column.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PopupWrapperComponent } from './components/popup-wrapper/popup-wrapper.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ColumnComponent,
     TaskCardComponent,
     CreateBoardComponent,
+    PopupWrapperComponent,
+    TaskDetailsComponent,
   ],
   imports: [
     BrowserModule,

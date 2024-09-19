@@ -1,5 +1,5 @@
 <div
-  class="mt-16 w-full p-4 flex justify-start items-start gap-4 md:gap-6 overflow-x-auto overflow-y-hidden"
+  class="h-screen mt-16 w-full p-4 flex justify-start items-start gap-4 md:gap-6 overflow-x-auto overflow-hidden bg-grey-3 dark:bg-black-2"
   [ngClass]="{
     'pl-60': isSidebarOpen,
     'pl-0': !isSidebarOpen
@@ -24,11 +24,22 @@
     </div>
     <div
       *ngIf="selectedBoard$ | async as selectedBoard"
-      class="flex gap-6 p-8 border border-red-1"
+      class="flex gap-6 p-8 h-full"
     >
-      <div *ngFor="let column of selectedBoard.columns">
+      <div class="" *ngFor="let column of selectedBoard.columns">
         <app-column [column]="column"></app-column>
+      </div>
+      <div
+        class="w-[250px] lg:w-[270px] flex flex-col justify-center items-center gap-5 duration-100 bg-grey-2 dark:bg-black-3 rounded-lg"
+      >
+        <app-button
+          text="+ Add New Task"
+          customStyle=" text-purple-1 transilation-all duration-300 text-white py-3 px-5 mt-5"
+          customTextStyle="text-grey-1 text-lg"
+        />
       </div>
     </div>
   </div>
 </div>
+
+<app-popup-wrapper></app-popup-wrapper>

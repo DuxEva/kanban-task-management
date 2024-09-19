@@ -14,16 +14,13 @@ export class CreateBoardComponent {
   boardForm!: FormGroup;
   boards$!: Observable<Board[]>;
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<AppState>
-  ) {
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.boards$ = this.store.select((state) => state.boards);
   }
 
   ngOnInit(): void {
     this.boardForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       columns: this.fb.array([this.createColumn()]),
     });
   }
@@ -43,7 +40,7 @@ export class CreateBoardComponent {
     this.columns.push(this.createColumn());
   }
 
-  removeColumn(index: number): void {
+  deleteColumn(index: number): void {
     this.columns.removeAt(index);
   }
 
@@ -54,7 +51,8 @@ export class CreateBoardComponent {
         columns: this.boardForm.value.columns,
       };
       this.store.dispatch(taskActions.addBoard({ board }));
-      // this.dataService.closeModal();
     }
   }
+
+  createBoard(): void {}
 }
