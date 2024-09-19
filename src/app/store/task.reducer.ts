@@ -5,8 +5,9 @@ import { AppState } from '../models';
 export const initialState: AppState = {
   boards: [],
   activatedBoard: { name: '', columns: [] },
-  isSidebarOpen: true,
+  isSidebarOpen: false,
   error: '',
+  showModel: '',
 };
 
 export const taskReducer = createReducer(
@@ -18,7 +19,6 @@ export const taskReducer = createReducer(
     ...state,
     boards: data.boards,
     activatedBoard: data.boards[0],
-    isSidebarOpen: false,
   })),
   on(taskActions.getTasksFailure, (state, { error }) => ({
     ...state,
@@ -31,5 +31,32 @@ export const taskReducer = createReducer(
       name: '',
       columns: [],
     },
+  })),
+
+  // OPEN POPUPS
+
+  on(taskActions.openEditTaskModel, (state, { isEditTaskOpen }) => ({
+    ...state,
+    isEditTaskOpen,
+  })),
+
+  on(taskActions.openCreateBoardModel, (state, { isCreateBoardOpen }) => ({
+    ...state,
+    isCreateBoardOpen,
+  })),
+
+  on(taskActions.openDeleteBoardModel, (state, { isDeleteBoardOpen }) => ({
+    ...state,
+    isDeleteBoardOpen,
+  })),
+
+  on(taskActions.openDeleteTaskModel, (state, { isDeleteTaskOpen }) => ({
+    ...state,
+    isDeleteTaskOpen,
+  })),
+
+  on(taskActions.showModel, (state, { showModel }) => ({
+    ...state,
+    showModel,
   }))
 );

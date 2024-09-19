@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { AppState } from '../../models';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as taskActions from '../../store/task.actions';
+import * as taskSelectors from '../../store/task.selectors';
 
 @Component({
   selector: 'app-popup-wrapper',
@@ -6,17 +11,15 @@ import { Component } from '@angular/core';
   styleUrl: './popup-wrapper.component.css',
 })
 export class PopupWrapperComponent {
-  modalStatus!: boolean;
-  dialogueMode!: string;
+  isOpen!: boolean;
+  popupType$!: Observable<string>;
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.modalStatus = true;
-    this.dialogueMode = 'create';
+  constructor(private store: Store<AppState>) {
+    this.popupType$ = this.store.select(taskSelectors.selectShowModelState);
   }
 
   toggleDialogue() {
-    this.modalStatus = !this.modalStatus;
+    this.store.dispatch(taskActions.showModel({ showModel: '' }));
+    this.popupType$ = this.store.select(taskSelectors.selectShowModelState);
   }
 }

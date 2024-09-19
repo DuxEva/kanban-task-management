@@ -39,3 +39,30 @@ export const changeActivateddBoard = createAction(
   '[Task] Change Activated Board',
   props<{ title: string }>()
 );
+
+// OPEN POPUPS
+
+export const openEditTaskModel = createAction(
+  '[Task] Open Create Task Model',
+  props<{ isEditTaskOpen: boolean }>()
+);
+
+export const openCreateBoardModel = createAction(
+  '[Task] Open Create Board Model',
+  props<{ isCreateBoardOpen: boolean }>()
+);
+
+export const openDeleteBoardModel = createAction(
+  '[Task] Open Delete Board Model',
+  props<{ isDeleteBoardOpen: boolean }>()
+);
+
+export const openDeleteTaskModel = createAction(
+  '[Task] Open Delete Task Model',
+  props<{ isDeleteTaskOpen: boolean }>()
+);
+
+export const showModel = createAction(
+  '[Task] Show Model',
+  props<{ showModel: string }>()
+);

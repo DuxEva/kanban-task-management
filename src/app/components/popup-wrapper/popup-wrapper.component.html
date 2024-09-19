@@ -1,23 +1,27 @@
-<div
-  [ngClass]="
-    modalStatus
-      ? 'opacity-100 pointer-events-auto'
-      : 'opacity-0 pointer-events-none'
-  "
-  class="w-screen h-screen flex justify-center items-center bg-black/40 backdrop-blur-sm fixed z-50 top-0 left-0 transition-opacity duration-300"
->
-  <div
-    class="w-screen h-screen flex justify-center items-center backdrop-blur-sm fixed z-10 top-0 left-0"
-    (click)="toggleDialogue()"
-  ></div>
-
+<div *ngIf="popupType$ | async as popupType">
   <div
     [ngClass]="
-      modalStatus ? 'translate-y-0 opacity-100' : 'translate-y-32 opacity-0'
+      popupType.length > 1
+        ? 'opacity-100 pointer-events-auto'
+        : 'opacity-0 pointer-events-none'
     "
-    class="absolute z-20 w-[92%] md:w-[60%] lg:w-[50%] xl:w-[40%] bg-white dark:bg-black-3 p-6 rounded-3xl transition-all duration-300 ease-in-out shadow-md"
+    class="w-screen h-screen flex justify-center items-center bg-black/40 backdrop-blur-sm fixed z-50 top-0 left-0 transition-opacity duration-300"
   >
-    <!-- <app-create-board></app-create-board> -->
-    <app-task-details></app-task-details>
+    <div
+      class="w-screen h-screen flex justify-center items-center backdrop-blur-sm fixed z-10 top-0 left-0"
+      (click)="toggleDialogue()"
+    ></div>
+
+    <div
+      [ngClass]="
+        popupType.length > 1
+          ? 'translate-y-0 opacity-100'
+          : 'translate-y-32 opacity-0'
+      "
+      class="absolute z-20 w-[92%] md:w-[60%] lg:w-[50%] xl:w-[40%] bg-white dark:bg-black-3 p-6 rounded-3xl transition-all duration-300 ease-in-out shadow-md"
+    >
+      <app-create-board *ngIf="popupType === 'createTask'"></app-create-board>
+      <!-- <app-task-details></app-task-details> -->
+    </div>
   </div>
 </div>

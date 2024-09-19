@@ -13,12 +13,14 @@ export const selectActivatedBoard = createSelector(
   (state: AppState) => state.activatedBoard
 );
 
-export const selectSidebarState = createSelector(
-  selectTaskState,
-  (state: AppState) => state.isSidebarOpen
-);
-
 export const changeActivatedBoard = createSelector(
   selectTaskState,
   (state: AppState) => state.activatedBoard
+);
+
+// CHANGE POPUP STATE
+
+export const selectShowModelState = createSelector(
+  selectTaskState,
+  (state: AppState) => state.showModel
 );

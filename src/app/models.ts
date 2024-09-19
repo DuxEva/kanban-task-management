@@ -29,4 +29,5 @@ export interface AppState {
   activatedBoard: Board;
   isSidebarOpen: boolean;
   error: string;
+  showModel: string;
 }
