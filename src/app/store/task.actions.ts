@@ -35,7 +35,7 @@ export const getTasksFailure = createAction(
 
 export const loadTasks = createAction('[Task] Load Tasks');
 
-export const changeActivedBoard = createAction(
-  '[Task] Change Actived Board',
+export const changeActivateddBoard = createAction(
+  '[Task] Change Activated Board',
   props<{ title: string }>()
 );

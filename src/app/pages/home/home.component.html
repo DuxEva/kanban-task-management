@@ -1,12 +1,18 @@
 <div
-  class="pt-20 h-screen w-screen dark:bg-black-2 transition-all duration-300 max-sm:pl-0"
+  class="pt-20 h-screen overflow-y-hidden w-screen dark:bg-black-2 transition-all duration-300 max-sm:pl-0 px-8"
   [ngClass]="{
     'pl-60': isSidebarOpen,
     'pl-0': !isSidebarOpen
   }"
 >
-  <div class="flex items-center justify-center w-full h-full">
-    <div class="flex flex-col items-center">
+  <div
+    class="flex w-full h-full overflow-x-scroll"
+    *ngIf="selectedBoard$ | async as selectedBoard"
+  >
+    <div
+      class="flex flex-col justify-center items-center w-full"
+      *ngIf="!selectedBoard"
+    >
       <p class="text-center text-grey-1">
         This board is empty. Create a new column to get started.
       </p>
@@ -15,6 +21,14 @@
         text="Add New Task"
         customStyle="bg-purple-1 hover:bg-purple-1 transilation-all duration-300 rounded-full text-white py-3 px-5 mt-5"
       />
+    </div>
+    <div
+      *ngIf="selectedBoard$ | async as selectedBoard"
+      class="flex gap-6 p-8 border border-red-1"
+    >
+      <div *ngFor="let column of selectedBoard.columns">
+        <app-column [column]="column"></app-column>
+      </div>
     </div>
   </div>
 </div>

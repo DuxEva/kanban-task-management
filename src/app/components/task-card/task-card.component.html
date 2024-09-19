@@ -1,0 +1,12 @@
+<div
+  class="flex flex-col p-6 gap-4 w-full bg-white dark:bg-black-3 rounded-xl duration-100 shadow-lg hover:shadow-xl group"
+>
+  <h2
+    class="font-bold text-black dark:text-white group-hover:text-purple-2 duration-100"
+  >
+    {{ task.title }}
+  </h2>
+  <p class="text-grey-1">
+    {{ completedSubtasksCount }} of {{ task.subtasks.length }} subtasks
+  </p>
+</div>

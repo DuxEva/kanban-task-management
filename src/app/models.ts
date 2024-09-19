@@ -26,7 +26,7 @@ export interface Data {
 
 export interface AppState {
   boards: Board[];
-  activedBoard: Board;
+  activatedBoard: Board;
   isSidebarOpen: boolean;
   error: string;
 }

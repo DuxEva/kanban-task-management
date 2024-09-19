@@ -16,6 +16,8 @@ import { StoreModule } from '@ngrx/store';
 import { taskReducer } from './store/task.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskEffects } from './store/task.effect';
+import { ColumnComponent } from './components/column/column.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { TaskEffects } from './store/task.effect';
     SidebarComponent,
     ButtonComponent,
     HomeComponent,
+    ColumnComponent,
+    TaskCardComponent,
   ],
   imports: [
     BrowserModule,
