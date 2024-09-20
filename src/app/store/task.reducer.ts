@@ -8,6 +8,7 @@ export const initialState: AppState = {
   isSidebarOpen: false,
   error: '',
   showModel: '',
+  seletedTask: { title: '', description: '', status: '', subtasks: [] },
 };
 
 export const taskReducer = createReducer(
@@ -36,6 +37,11 @@ export const taskReducer = createReducer(
   on(taskActions.addBoard, (state, { board }) => ({
     ...state,
     boards: [...state.boards, board],
+  })),
+
+  on(taskActions.selectTask, (state, { task }) => ({
+    ...state,
+    seletedTask: task,
   })),
 
   // OPEN POPUPS

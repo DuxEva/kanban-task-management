@@ -25,7 +25,8 @@ export class TaskCardComponent implements OnInit {
     return this.task.subtasks.filter((subtask) => subtask.isCompleted).length;
   }
 
-  openTaskDetails(): void {
+  openTaskDetails(task: Task) {
     this.store.dispatch(taskActions.showModel({ showModel: 'taskDetails' }));
+    this.store.dispatch(taskActions.selectTask({ task }));
   }
 }

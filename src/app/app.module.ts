@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PopupWrapperComponent } from './components/popup-wrapper/popup-wrapper.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { FilterSubtaskPipe } from './pipes/filter-pipe';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,14 @@ import { CreateTaskComponent } from './components/create-task/create-task.compon
     PopupWrapperComponent,
     TaskDetailsComponent,
     CreateTaskComponent,
+    FilterSubtaskPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+
     StoreModule.forRoot({ tasks: taskReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

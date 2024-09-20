@@ -1,36 +1,44 @@
-<div class="w-full flex flex-col gap-4 p-2" [formGroup]="taskForm">
+<div
+  class="w-full flex flex-col gap-4 p-2"
+  [formGroup]="taskForm"
+  *ngIf="selectedTask$ | async as selectedTask"
+>
   <div class="w-full flex gap-1 items-center">
     <h2 class="w-full font-bold text-xl text-black-1 dark:text-white">
-      Research pricing points of various competitors and trial different
-      business models
+      {{ selectedTask.title }}
     </h2>
 
     <app-button icon="/assets/icon-vertical-ellipsis.svg" customStyle="" />
   </div>
   <p class="text-mediumGray dark:text-grey-1">
-    We know what we're planning to build for version one. Now we need to
-    finalise the first pricing model we'll use. Keep iterating the subtasks
-    until we have a coherent proposition.
+    {{ selectedTask.description }}
   </p>
 
   <div class="w-full flex flex-col gap-4 mt-4">
-    <h2 class="font-medium text-grey-1 dark:text-white">Subtasks (2 of 3)</h2>
+    <h2 class="font-medium text-grey-1 dark:text-white">
+      Subtasks ({{ (selectedTask.subtasks | filterSubtask : "true").length }} of
+      {{ selectedTask.subtasks.length }})
+    </h2>
 
     <div
       class="w-full flex flex-col justify-start items-start gap-2 hover:shadow-lg"
     >
       <div
         class="w-full flex items-center gap-4 p-4 bg-lightGray dark:bg-black-2 bg-grey-2 rounded-md"
+        *ngFor="let subtask of selectedTask.subtasks"
       >
         <input
           type="checkbox"
-          checked
-          id="subtask1"
-          name="subtask1"
+          [checked]="subtask.isCompleted"
+          id="{{ subtask.title }}"
+          name="{{ subtask.title }}"
           class="form-checkbox w-4 h-4 bg-purple-1"
         />
-        <label for="subtask1" class="text-grey-1 line-through"
-          >Research competitor pricing points</label
+        <label
+          for="subtask1"
+          class="text-grey-1"
+          [ngClass]="{ 'line-through': subtask.isCompleted }"
+          >{{ subtask.title }}</label
         >
       </div>
     </div>

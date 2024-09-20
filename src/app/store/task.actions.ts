@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Board } from '../models';
+import { Board, Task } from '../models';
 
 export const addBoard = createAction(
   '[Sidebar Component] Add Board',
@@ -38,6 +38,11 @@ export const loadTasks = createAction('[Task] Load Tasks');
 export const changeActivateddBoard = createAction(
   '[Task] Change Activated Board',
   props<{ title: string }>()
+);
+
+export const selectTask = createAction(
+  '[Task] Select Task',
+  props<{ task: Task }>()
 );
 
 // OPEN POPUPS

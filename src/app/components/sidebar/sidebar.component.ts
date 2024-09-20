@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { AppState, Board } from '../../models';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import * as taskSelectors from '../../store/task.selectors';
 import * as taskActions from '../../store/task.actions';
 

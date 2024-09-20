@@ -18,6 +18,11 @@ export const changeActivatedBoard = createSelector(
   (state: AppState) => state.activatedBoard
 );
 
+export const seletedTask = createSelector(
+  selectTaskState,
+  (state: AppState) => state.seletedTask
+);
+
 // CHANGE POPUP STATE
 
 export const selectShowModelState = createSelector(

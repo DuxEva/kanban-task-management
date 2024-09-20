@@ -30,4 +30,5 @@ export interface AppState {
   isSidebarOpen: boolean;
   error: string;
   showModel: string;
+  seletedTask: Task;
 }
