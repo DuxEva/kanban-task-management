@@ -24,8 +24,9 @@
       class="w-full flex flex-col justify-start items-start gap-2 hover:shadow-lg"
     >
       <div
-        class="w-full flex items-center gap-4 p-4 bg-lightGray dark:bg-black-2 bg-grey-2 rounded-md"
+        class="w-full flex items-center gap-4 p-4 bg-lightGray dark:bg-black-2 bg-grey-2 rounded-md hover:shadow-lg"
         *ngFor="let subtask of selectedTask.subtasks"
+        (click)="toggleSubtaskStatus(selectedTask.title, subtask.title)"
       >
         <input
           type="checkbox"
@@ -35,7 +36,7 @@
           class="form-checkbox w-4 h-4 bg-purple-1"
         />
         <label
-          for="subtask1"
+          for="{{ subtask.title }}"
           class="text-grey-1"
           [ngClass]="{ 'line-through': subtask.isCompleted }"
           >{{ subtask.title }}</label
@@ -56,12 +57,13 @@
       id="board-name"
       formControlName="name"
       placeholder="e.g. Take coffee break"
-      class="w-full px-4 p-3 rounded-lg border dark:bg-black-2 border-grey-1 font-medium text-black-1 dark:text-white"
+      class="w-full px-4 p-3 rounded-lg border dark:bg-black-2 border-grey-1 font-medium text-black-1 dark:text-white outline-none"
     >
-      <option>Task 00</option>
-      <option>Task 01</option>
-      <option>Task 02</option>
-      <option>Task 03</option>
+      <ng-container *ngIf="selectedBoard$ | async as board">
+        <option *ngFor="let column of board.columns" [value]="column.name">
+          {{ column.name }}
+        </option>
+      </ng-container>
     </select>
   </div>
 </div>

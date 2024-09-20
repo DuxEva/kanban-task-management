@@ -23,6 +23,15 @@ export const seletedTask = createSelector(
   (state: AppState) => state.seletedTask
 );
 
+// update subtask of a task
+
+export const updateSubtaskStatus = createSelector(
+  selectTaskState,
+  (state: AppState) => {
+    state.seletedTask;
+  }
+);
+
 // CHANGE POPUP STATE
 
 export const selectShowModelState = createSelector(

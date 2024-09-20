@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { AppState, Task } from '../../models';
+import { AppState, Board, Subtask, Task } from '../../models';
 import * as taskSelectors from '../../store/task.selectors';
+import * as taskActions from '../../store/task.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 export class TaskDetailsComponent implements OnInit {
   taskForm!: FormGroup;
   selectedTask$!: Observable<Task>;
+  selectedBoard$!: Observable<Board>;
 
   constructor(private store: Store<AppState>) {}
 
@@ -22,12 +24,17 @@ export class TaskDetailsComponent implements OnInit {
     });
 
     this.selectedTask$ = this.store.pipe(select(taskSelectors.seletedTask));
-    this.selectedTask$.subscribe((task) => {
-      console.log(task);
-    });
+    this.selectedBoard$ = this.store.pipe(
+      select(taskSelectors.selectActivatedBoard)
+    );
   }
 
-  // get completedSubtasksCount(): number {
-  //   return this.taskForm.value.subtasks.filter((subtask) => subtask.isCompleted).length;
-  // }
+  updateTaskStatus(columnName: string) {
+    console.log('Task status updated');
+  }
+  toggleSubtaskStatus(taskTitle: string, subtaskTitle: string) {
+    this.store.dispatch(
+      taskActions.updateSubtask({ taskTitle, subTaskTitle: subtaskTitle })
+    );
+  }
 }

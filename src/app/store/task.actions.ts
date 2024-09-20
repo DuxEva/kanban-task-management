@@ -45,6 +45,13 @@ export const selectTask = createAction(
   props<{ task: Task }>()
 );
 
+// update subtask of a task
+
+export const updateSubtask = createAction(
+  '[Task] Update Subtask',
+  props<{ taskTitle: string; subTaskTitle: string }>()
+);
+
 // OPEN POPUPS
 
 export const openSidebar = createAction(

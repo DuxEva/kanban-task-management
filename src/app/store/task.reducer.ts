@@ -44,6 +44,58 @@ export const taskReducer = createReducer(
     seletedTask: task,
   })),
 
+  // update subtask of a task
+
+  on(taskActions.updateSubtask, (state, { taskTitle, subTaskTitle }) => ({
+    ...state,
+    seletedTask: {
+      ...state.seletedTask,
+      subtasks: state.seletedTask.subtasks.map((subtask) =>
+        subtask.title === subTaskTitle
+          ? { ...subtask, isCompleted: !subtask.isCompleted }
+          : subtask
+      ),
+    },
+
+    activatedBoard: {
+      ...state.activatedBoard,
+      columns: state.activatedBoard.columns.map((column) => ({
+        ...column,
+        tasks: column.tasks.map((task) =>
+          task.title === taskTitle
+            ? {
+                ...task,
+                subtasks: task.subtasks.map((subtask) =>
+                  subtask.title === subTaskTitle
+                    ? { ...subtask, isCompleted: !subtask.isCompleted }
+                    : subtask
+                ),
+              }
+            : task
+        ),
+      })),
+    },
+
+    boards: state.boards.map((board) => ({
+      ...board,
+      columns: board.columns.map((column) => ({
+        ...column,
+        tasks: column.tasks.map((task) =>
+          task.title === taskTitle
+            ? {
+                ...task,
+                subtasks: task.subtasks.map((subtask) =>
+                  subtask.title === subTaskTitle
+                    ? { ...subtask, isCompleted: !subtask.isCompleted }
+                    : subtask
+                ),
+              }
+            : task
+        ),
+      })),
+    })),
+  })),
+
   // OPEN POPUPS
 
   on(taskActions.showModel, (state, { showModel }) => ({
