@@ -20,8 +20,7 @@ import * as taskActions from '../../store/task.actions';
 })
 export class SidebarComponent {
   darkMode = false;
-  isSidebarOpen = true;
-  @Output() onSidebarToggle = new EventEmitter<boolean>();
+  isSidebarOpen!: boolean;
   @Output() darkModeChange = new EventEmitter<boolean>();
 
   boards!: Board[];
@@ -47,6 +46,10 @@ export class SidebarComponent {
       .subscribe((board) => {
         this.selectedBoard = board;
       });
+
+    this.store.select(taskSelectors.selectSidebarState).subscribe((isOpen) => {
+      this.isSidebarOpen = isOpen;
+    });
   }
 
   selectBoard(board: Board) {
@@ -86,10 +89,16 @@ export class SidebarComponent {
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
-    this.onSidebarToggle.emit(this.isSidebarOpen);
+    this.store.dispatch(
+      taskActions.openSidebar({ isSidebarOpen: this.isSidebarOpen })
+    );
   }
 
   onCreateNewBoard(): void {
     this.store.dispatch(taskActions.showModel({ showModel: 'createBoard' }));
+  }
+
+  onSidebarOpen() {
+    this.store.dispatch(taskActions.openSidebar({ isSidebarOpen: true }));
   }
 }

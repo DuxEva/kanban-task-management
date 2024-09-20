@@ -43,5 +43,10 @@ export const taskReducer = createReducer(
   on(taskActions.showModel, (state, { showModel }) => ({
     ...state,
     showModel,
+  })),
+
+  on(taskActions.openSidebar, (state, { isSidebarOpen }) => ({
+    ...state,
+    isSidebarOpen,
   }))
 );

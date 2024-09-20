@@ -11,13 +11,19 @@ import { Observable } from 'rxjs';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  @Input() isSidebarOpen = true;
   tasks$!: Observable<Board[]>;
   selectedBoard$!: Observable<Board>;
+  isSidebarOpen!: boolean;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
+    this.store
+      .pipe(select(taskSelectors.selectSidebarState))
+      .subscribe((isOpen) => {
+        this.isSidebarOpen = isOpen;
+      });
+
     this.tasks$ = this.store.pipe(select(taskSelectors.selectBoards));
     this.selectedBoard$ = this.store.pipe(
       select(taskSelectors.selectActivatedBoard)

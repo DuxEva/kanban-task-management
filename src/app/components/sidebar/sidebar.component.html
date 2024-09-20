@@ -89,36 +89,45 @@
 </button>
 
 <div
-  class="sm:hidden fixed inset-0 bg-black-1 bg-opacity-50 flex justify-center items-start z-20 top-20 transition-all duration-300"
+  class="w-screen h-screen flex justify-center items-center bg-black/40 backdrop-blur-sm fixed z-50 top-0 left-0 transition-opacity duration-300"
+  [ngClass]="
+    isSidebarOpen
+      ? 'opacity-100 pointer-events-auto'
+      : 'opacity-0 pointer-events-none'
+  "
+  (click)="toggleSidebar()"
 >
   <!-- Backdrop covers the entire screen, and flex centers the aside -->
   <div
-    class="mt-16 bg-white dark:bg-black-2 z-30 transition-all duration-300 w-[90%] max-w-md py-5 rounded-lg"
+    class="mt-16 bg-white dark:bg-black-2 z-30 w-[90%] max-w-md py-5 rounded-xl duration-300 ease-in-out shadow-md"
   >
     <!-- Sidebar content -->
     <div class="flex flex-col">
       <div>
-        <h1 class="text-grey-1 mt-5">ALL BOARDS (3)</h1>
+        <h1 class="text-grey-1 mt-5 ml-5">ALL BOARDS ({{ boards.length }} )</h1>
         <div class="grid grid-cols-1 gap-1 mt-5">
           <app-button
-            icon="/assets/icon-board-white.svg"
-            text="Platform Launch"
-            customStyle=" py-3 px-5 rounded-r-full text-white bg-purple-1"
+            *ngFor="let board of boards"
+            [icon]="
+              board.name === selectedBoard.name
+                ? '/assets/icon-board-white.svg'
+                : '/assets/icon-board.svg'
+            "
+            text="{{ board.name }}"
+            customStyle="py-3 px-5 "
+            [ngClass]="{
+              'bg-purple-1 rounded-r-full text-white w-[95%]':
+                board.name === selectedBoard.name,
+              'text-grey-1': board.name !== selectedBoard.name
+            }"
+            (click)="selectBoard(board)"
           />
-          <app-button
-            icon="/assets/icon-board.svg"
-            text="Marketing Plan"
-            customStyle=" py-3 px-5 text-grey-1"
-          />
-          <app-button
-            icon="/assets/icon-board.svg"
-            text="Roadmap"
-            customStyle=" py-3 px-5 text-grey-1"
-          />
+
           <app-button
             icon="/assets/icon-board-purple.svg"
             text="+ Create New Board"
             customStyle=" py-3 px-5 text-purple-1"
+            (click)="onCreateNewBoard()"
           />
         </div>
       </div>

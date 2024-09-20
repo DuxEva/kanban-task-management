@@ -42,6 +42,11 @@ export const changeActivateddBoard = createAction(
 
 // OPEN POPUPS
 
+export const openSidebar = createAction(
+  '[Task] Open Sidebar',
+  props<{ isSidebarOpen: boolean }>()
+);
+
 export const openEditTaskModel = createAction(
   '[Task] Open Create Task Model',
   props<{ isEditTaskOpen: boolean }>()

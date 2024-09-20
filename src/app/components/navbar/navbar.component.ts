@@ -6,8 +6,8 @@ import {
   Input,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../models';
+import { select, Store } from '@ngrx/store';
+import { AppState, Board } from '../../models';
 import * as taskActions from '../../store/task.actions';
 import * as taskSelectors from '../../store/task.selectors';
 import { clear } from 'console';
@@ -19,7 +19,10 @@ import { clear } from 'console';
 })
 export class NavbarComponent implements OnChanges {
   @Input() isDarkMode = true;
+  isSidebarOpen!: boolean;
   isCreateTaskOpen = false;
+  selectedBoard!: Board;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private store: Store<AppState>
@@ -35,9 +38,28 @@ export class NavbarComponent implements OnChanges {
     if (isPlatformBrowser(this.platformId)) {
       this.isDarkMode = localStorage.getItem('theme') === 'dark';
     }
+
+    this.store
+      .pipe(select(taskSelectors.selectActivatedBoard))
+      .subscribe((board) => {
+        this.selectedBoard = board;
+      });
+
+    this.store
+      .pipe(select(taskSelectors.selectSidebarState))
+      .subscribe((isOpen) => {
+        this.isSidebarOpen = isOpen;
+      });
   }
 
   onAddTaskOnCurrentBoard() {
     this.store.dispatch(taskActions.showModel({ showModel: 'createTask' }));
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.store.dispatch(
+      taskActions.openSidebar({ isSidebarOpen: this.isSidebarOpen })
+    );
   }
 }

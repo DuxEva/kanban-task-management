@@ -24,3 +24,8 @@ export const selectShowModelState = createSelector(
   selectTaskState,
   (state: AppState) => state.showModel
 );
+
+export const selectSidebarState = createSelector(
+  selectTaskState,
+  (state: AppState) => state.isSidebarOpen
+);

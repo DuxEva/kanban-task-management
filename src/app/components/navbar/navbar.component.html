@@ -15,14 +15,17 @@
       <h1
         class="text-black-1 dark:text-white text-2xl max-md:text-lg font-bold"
       >
-        Platform Launch
+        {{ selectedBoard.name }}
       </h1>
     </div>
-    <button class="h-full flex items-center gap-2 sm:hidden">
+    <button
+      class="h-full flex items-center gap-2 sm:hidden"
+      (click)="toggleSidebar()"
+    >
       <h1
         class="text-black-1 dark:text-white text-2xl max-md:text-lg font-bold"
       >
-        Platform Launch
+        {{ selectedBoard.name }}
       </h1>
       <img
         class="sm:hidden h-3"
