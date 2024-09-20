@@ -9,3 +9,27 @@
   margin: 0;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
+
+.custom-scroll {
+  scroll-behavior: smooth;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  @apply w-[8px] h-[10px];
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply bg-black-2 dark:bg-grey-3  rounded-md;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  @apply rounded-md h-[10px];
+}
+
+.input-field {
+  @apply border dark:border-black-2 dark:bg-black-2 p-2 font-medium rounded-md border-grey-3 text-black-1 dark:text-white outline-none;
+}
+
+.danger {
+  @apply text-red-1;
+}

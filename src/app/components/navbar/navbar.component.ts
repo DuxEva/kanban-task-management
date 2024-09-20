@@ -52,7 +52,7 @@ export class NavbarComponent implements OnChanges {
       });
   }
 
-  onAddTaskOnCurrentBoard() {
+  createNewTask() {
     this.store.dispatch(taskActions.showModel({ showModel: 'createTask' }));
   }
 

@@ -1,12 +1,12 @@
 <div
-  class="h-screen mt-16 w-screen p-4 flex justify-start items-start gap-4 md:gap-6 overflow-x-auto overflow-hidden bg-grey-3 dark:bg-black-2"
+  class="h-screen mt-16 w-screen p-4 pr-0 flex justify-start items-start gap-4 md:gap-6 overflow-y-scroll bg-grey-3 dark:bg-black-2 custom-scroll"
   [ngClass]="{
     'pl-60': isSidebarOpen,
     'pl-0': !isSidebarOpen
   }"
 >
   <div
-    class="flex w-full h-full overflow-x-scroll"
+    class="flex w-full h-full overflow-x-scroll custom-scroll"
     *ngIf="selectedBoard$ | async as selectedBoard"
   >
     <div
@@ -30,10 +30,10 @@
         <app-column [column]="column"></app-column>
       </div>
       <div
-        class="w-[250px] lg:w-[270px] flex flex-col justify-center items-center gap-5 duration-100 bg-grey-2 dark:bg-black-3 rounded-lg"
+        class="w-[250px] lg:w-[270px] flex flex-col justify-center items-center gap-5 duration-100 bg-grey-2 dark:bg-black-3 rounded-lg mt-14"
       >
         <app-button
-          text="+ Add New Task"
+          text="+ Add New Column"
           customStyle=" text-purple-1 transilation-all duration-300 text-white py-3 px-5 mt-5"
           customTextStyle="text-grey-1 text-lg"
         />

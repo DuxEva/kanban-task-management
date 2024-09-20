@@ -22,6 +22,7 @@ import { CreateBoardComponent } from './components/create-board/create-board.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { PopupWrapperComponent } from './components/popup-wrapper/popup-wrapper.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TaskDetailsComponent } from './components/task-details/task-details.com
     CreateBoardComponent,
     PopupWrapperComponent,
     TaskDetailsComponent,
+    CreateTaskComponent,
   ],
   imports: [
     BrowserModule,
