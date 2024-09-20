@@ -31,6 +31,7 @@ export class TaskDetailsComponent implements OnInit {
 
   updateTaskStatus(event: Event, task: Task) {
     const taskStatus = (event.target as HTMLSelectElement).value;
+    if (taskStatus === '') return;
     if (taskStatus !== task.status) {
       console.log('Task status updated to: ', taskStatus);
       this.store.dispatch(
