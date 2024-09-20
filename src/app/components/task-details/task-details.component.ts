@@ -29,9 +29,16 @@ export class TaskDetailsComponent implements OnInit {
     );
   }
 
-  updateTaskStatus(columnName: string) {
-    console.log('Task status updated');
+  updateTaskStatus(event: Event, task: Task) {
+    const taskStatus = (event.target as HTMLSelectElement).value;
+    if (taskStatus !== task.status) {
+      console.log('Task status updated to: ', taskStatus);
+      this.store.dispatch(
+        taskActions.updateTask({ taskTitle: task.title, status: taskStatus })
+      );
+    }
   }
+
   toggleSubtaskStatus(taskTitle: string, subtaskTitle: string) {
     this.store.dispatch(
       taskActions.updateSubtask({ taskTitle, subTaskTitle: subtaskTitle })

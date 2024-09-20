@@ -13,7 +13,7 @@ export const removeTask = createAction(
 
 export const updateTask = createAction(
   '[Task] Update Task',
-  props<{ task: string }>()
+  props<{ taskTitle: string; status: string }>()
 );
 
 export const addColumn = createAction(
