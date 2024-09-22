@@ -11,14 +11,14 @@
   >
     <div
       class="flex flex-col justify-center items-center w-full"
-      *ngIf="!selectedBoard"
+      *ngIf="!boards.length"
     >
       <p class="text-center text-grey-1">
         This board is empty. Create a new column to get started.
       </p>
       <app-button
         icon="/assets/icon-add-task-mobile.svg"
-        text="Add New Task"
+        text="Add New Column"
         customStyle="bg-purple-1 hover:bg-purple-1 transilation-all duration-300 rounded-full text-white py-3 px-5 mt-5"
       />
     </div>
@@ -31,6 +31,9 @@
       </div>
       <div
         class="w-[250px] lg:w-[270px] flex flex-col justify-center items-center gap-5 duration-100 bg-grey-2 dark:bg-black-3 rounded-lg mt-14"
+        [ngClass]="{
+          'hidden': !boards.length,
+        }"
       >
         <app-button
           text="+ Add New Column"

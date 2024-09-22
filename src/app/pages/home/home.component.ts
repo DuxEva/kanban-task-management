@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   tasks$!: Observable<Board[]>;
   selectedBoard$!: Observable<Board>;
   isSidebarOpen!: boolean;
+  boards!: Board[];
 
   constructor(private store: Store<AppState>) {}
 
@@ -30,5 +31,10 @@ export class HomeComponent implements OnInit {
     );
 
     this.store.dispatch(taskActions.loadTasks());
+
+    this.store.pipe(select(taskSelectors.selectBoards)).subscribe((boards) => {
+      this.boards = boards;
+      console.log(this.boards);
+    });
   }
 }
