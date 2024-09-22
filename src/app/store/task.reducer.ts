@@ -6,6 +6,7 @@ export const initialState: AppState = {
   boards: [],
   activatedBoard: { name: '', columns: [] },
   isSidebarOpen: false,
+  isActionOpen: false,
   error: '',
   showModel: '',
   seletedTask: { title: '', description: '', status: '', subtasks: [] },
@@ -95,6 +96,18 @@ export const taskReducer = createReducer(
       })),
     })),
   })),
+
+  // Delete Board
+
+  on(taskActions.deleteBoard, (state, { board }) => {
+    const updatedBoards = state.boards.filter((b) => b.name !== board.name);
+
+    return {
+      ...state,
+      boards: updatedBoards,
+      activatedBoard: updatedBoards[0] || { name: '', columns: [] },
+    };
+  }),
 
   on(taskActions.updateTask, (state, { taskTitle, status }) => {
     // Find the column that matches the new status
@@ -209,5 +222,10 @@ export const taskReducer = createReducer(
   on(taskActions.openSidebar, (state, { isSidebarOpen }) => ({
     ...state,
     isSidebarOpen,
+  })),
+
+  on(taskActions.isActionOpen, (state, { isActionOpen }) => ({
+    ...state,
+    isActionOpen,
   }))
 );

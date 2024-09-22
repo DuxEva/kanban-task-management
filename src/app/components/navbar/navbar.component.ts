@@ -21,6 +21,7 @@ export class NavbarComponent implements OnChanges {
   @Input() isDarkMode = true;
   isSidebarOpen!: boolean;
   isCreateTaskOpen = false;
+  isActionOpened: boolean = false;
   selectedBoard!: Board;
 
   constructor(
@@ -61,5 +62,17 @@ export class NavbarComponent implements OnChanges {
     this.store.dispatch(
       taskActions.openSidebar({ isSidebarOpen: this.isSidebarOpen })
     );
+  }
+
+  openActions() {
+    this.isActionOpened = !this.isActionOpened;
+  }
+
+  openEditTask() {
+    this.store.dispatch(taskActions.showModel({ showModel: 'editBoard' }));
+  }
+
+  openDeleteTask() {
+    this.store.dispatch(taskActions.showModel({ showModel: 'deleteBoard' }));
   }
 }

@@ -1,0 +1,22 @@
+<div class="w-full flex flex-col gap-4 md:gap-6 md:p-4">
+  <h2 class="font-bold text-xl text-red-1">Delete this board?</h2>
+  <p class="text-grey-1">
+    Are you sure you want to delete the ‘Platform Launch’ board? This action
+    will remove all columns and tasks and cannot be reversed.
+  </p>
+  <div class="w-full flex items-center gap-4">
+    <button
+      class="w-full bg-red text-white bg-red-1 px-3 lg:px-4 md:px-6 py-3 lg:py-4 rounded-full flex justify-center items-center gap-2"
+      (click)="deleteBoard()"
+    >
+      <p class="capitalize font-bold">Delete</p>
+    </button>
+
+    <button
+      class="w-full bg-grey-2 text-purple-1 dark:bg-white px-3 lg:px-4 md:px-6 py-3 lg:py-4 rounded-full flex justify-center items-center gap-2"
+      (click)="closeModel()"
+    >
+      <p class="capitalize font-bold">Cancel</p>
+    </button>
+  </div>
+</div>

@@ -28,6 +28,7 @@ export interface AppState {
   boards: Board[];
   activatedBoard: Board;
   isSidebarOpen: boolean;
+  isActionOpen: boolean;
   error: string;
   showModel: string;
   seletedTask: Task;

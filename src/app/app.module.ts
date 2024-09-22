@@ -24,6 +24,7 @@ import { PopupWrapperComponent } from './components/popup-wrapper/popup-wrapper.
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { FilterSubtaskPipe } from './pipes/filter-pipe';
+import { DeleteboardComponent } from './components/deleteboard/deleteboard.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { FilterSubtaskPipe } from './pipes/filter-pipe';
     TaskDetailsComponent,
     CreateTaskComponent,
     FilterSubtaskPipe,
+    DeleteboardComponent,
   ],
   imports: [
     BrowserModule,

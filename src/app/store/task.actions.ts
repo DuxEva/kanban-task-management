@@ -45,6 +45,11 @@ export const selectTask = createAction(
   props<{ task: Task }>()
 );
 
+export const deleteBoard = createAction(
+  '[Task] Delete Board',
+  props<{ board: Board }>()
+);
+
 // update subtask of a task
 
 export const updateSubtask = createAction(
@@ -54,9 +59,11 @@ export const updateSubtask = createAction(
 
 // ADD TASK
 
-export const addTask = createAction(
-  '[Task] Add Task',
-  props<{ task: Task }>()
+export const addTask = createAction('[Task] Add Task', props<{ task: Task }>());
+
+export const isActionOpen = createAction(
+  '[Task] Is Action Open',
+  props<{ isActionOpen: boolean }>()
 );
 
 // OPEN POPUPS
