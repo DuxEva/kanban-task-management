@@ -55,9 +55,7 @@ export class CreateTaskComponent implements OnInit {
 
   onSubmit() {
     this.taskForm.markAllAsTouched();
-    console.log(this.taskForm.value);
     if (this.taskForm.invalid) {
-      console.log('Form is invalid');
       return;
     }
 
@@ -72,6 +70,7 @@ export class CreateTaskComponent implements OnInit {
     };
 
     this.store.dispatch(taskActions.addTask({ task }));
+    this.store.dispatch(taskActions.showModel({ showModel: '' }));
 
     this.taskForm.reset();
   }
