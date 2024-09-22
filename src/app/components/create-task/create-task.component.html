@@ -81,23 +81,17 @@
       formControlName="status"
       class="w-full px-4 p-3 rounded-lg border dark:bg-black-2 border-grey-1 font-medium dark:text-white outline-none"
     >
-      <option value="">Done</option>
-      <option value="">Skip</option>
-      <option
-        *ngFor="let column of columns$ | async; let i = index"
-        [value]="i"
-      >
-        {{ column.name }}
-      </option>
+      <ng-container *ngIf="selectedBoard as board">
+        <option *ngFor="let column of board.columns" [value]="column.name">
+          {{ column.name }}
+        </option>
+      </ng-container>
     </select>
     <div
       class="-mt-3 font-medium"
-      *ngIf="
-        taskForm.get('status')?.invalid &&
-        (taskForm.get('status')?.dirty || taskForm.get('status')?.touched)
-      "
+      *ngIf="taskForm.get('status')?.invalid && taskForm.get('status')?.touched"
     >
-      <small class="text-red">Status is required.</small>
+      <small class="text-red-2">Status is required.</small>
     </div>
   </div>
 

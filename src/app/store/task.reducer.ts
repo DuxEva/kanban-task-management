@@ -158,6 +158,47 @@ export const taskReducer = createReducer(
     };
   }),
 
+  on(taskActions.addTask, (state, { task }) => {
+    // Find the column that matches the new task status
+    const targetColumnIndex = state.activatedBoard.columns.findIndex(
+      (column) => column.name === task.status
+    );
+
+    // If the column for the new task status is found
+    if (targetColumnIndex === -1) {
+      return state; // Or handle the case where the column is not found
+    }
+
+    // Update activatedBoard columns
+    const updatedColumns = state.activatedBoard.columns.map((column) => {
+      // If this column matches the new task status, add the task to it
+      if (column.name === task.status) {
+        return {
+          ...column,
+          tasks: [...column.tasks, task],
+        };
+      }
+
+      return column;
+    });
+
+    return {
+      ...state,
+      activatedBoard: {
+        ...state.activatedBoard,
+        columns: updatedColumns,
+      },
+      // Make sure boards are also updated with the new column structure
+      boards: state.boards.map((board) => ({
+        ...board,
+        columns:
+          board.name === state.activatedBoard.name
+            ? updatedColumns
+            : board.columns,
+      })),
+    };
+  }),
+
   // OPEN POPUPS
 
   on(taskActions.showModel, (state, { showModel }) => ({

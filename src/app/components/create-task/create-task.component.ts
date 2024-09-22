@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Board, Column, Task } from '../../models';
+import { AppState, Board, Column, Task } from '../../models';
+import * as taskActions from '../../store/task.actions';
+import * as taskSelectors from '../../store/task.selectors';
 
 @Component({
   selector: 'app-create-task',
@@ -13,8 +15,9 @@ export class CreateTaskComponent implements OnInit {
   taskForm!: FormGroup;
   boards: Board[] = [];
   columns$!: Observable<Column[]>;
+  selectedBoard!: Board;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
@@ -23,6 +26,19 @@ export class CreateTaskComponent implements OnInit {
       status: ['', Validators.required],
       subtasks: this.fb.array([]),
     });
+
+    this.store
+      .pipe(select(taskSelectors.selectActivatedBoard))
+      .subscribe((board: Board) => {
+        this.selectedBoard = board;
+      });
+
+    if (this.selectedBoard && this.selectedBoard.columns.length > 0) {
+      const firstColumn = this.selectedBoard.columns[0].name;
+      this.taskForm.patchValue({
+        status: firstColumn,
+      });
+    }
   }
 
   get subtasks() {
@@ -30,7 +46,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   addSubtask() {
-    this.subtasks.push(this.fb.control(''));
+    this.subtasks.push(this.fb.control('', Validators.required));
   }
 
   removeSubtask(index: number) {
@@ -38,7 +54,10 @@ export class CreateTaskComponent implements OnInit {
   }
 
   onSubmit() {
+    this.taskForm.markAllAsTouched();
+    console.log(this.taskForm.value);
     if (this.taskForm.invalid) {
+      console.log('Form is invalid');
       return;
     }
 
@@ -51,6 +70,8 @@ export class CreateTaskComponent implements OnInit {
         isCompleted: false,
       })),
     };
+
+    this.store.dispatch(taskActions.addTask({ task }));
 
     this.taskForm.reset();
   }

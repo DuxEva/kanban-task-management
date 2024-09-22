@@ -59,6 +59,7 @@
       placeholder="e.g. Take coffee break"
       class="w-full px-4 p-3 rounded-lg border dark:bg-black-2 border-grey-1 font-medium text-black-1 dark:text-white outline-none"
       (click)="updateTaskStatus($event, selectedTask)"
+      [value]="selectedTask.status"
     >
       <ng-container *ngIf="selectedBoard$ | async as board">
         <option *ngFor="let column of board.columns" [value]="column.name">

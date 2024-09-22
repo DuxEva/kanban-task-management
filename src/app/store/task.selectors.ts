@@ -32,6 +32,13 @@ export const updateSubtaskStatus = createSelector(
   }
 );
 
+// ADD TASK
+
+export const addTask = createSelector(
+  selectTaskState,
+  (state: AppState) => state.boards
+);
+
 // CHANGE POPUP STATE
 
 export const selectShowModelState = createSelector(

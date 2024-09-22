@@ -52,6 +52,13 @@ export const updateSubtask = createAction(
   props<{ taskTitle: string; subTaskTitle: string }>()
 );
 
+// ADD TASK
+
+export const addTask = createAction(
+  '[Task] Add Task',
+  props<{ task: Task }>()
+);
+
 // OPEN POPUPS
 
 export const openSidebar = createAction(
