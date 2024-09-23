@@ -10,7 +10,6 @@ import { select, Store } from '@ngrx/store';
 import { AppState, Board } from '../../models';
 import * as taskActions from '../../store/task.actions';
 import * as taskSelectors from '../../store/task.selectors';
-import { clear } from 'console';
 
 @Component({
   selector: 'app-navbar',

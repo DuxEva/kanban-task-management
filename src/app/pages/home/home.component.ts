@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
 
     this.store.pipe(select(taskSelectors.selectBoards)).subscribe((boards) => {
       this.boards = boards;
-      console.log(this.boards);
     });
   }
 }
