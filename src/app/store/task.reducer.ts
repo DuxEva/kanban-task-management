@@ -110,28 +110,14 @@ export const taskReducer = createReducer(
   }),
 
   on(taskActions.updateTask, (state, { taskTitle, status }) => {
-    // Find the column that matches the new status
-    const targetColumnIndex = state.activatedBoard.columns.findIndex(
-      (column) => column.name === status
-    );
-
-    // If the column for the new status is found
-    if (targetColumnIndex === -1) {
-      return state; // Or handle the case where the column is not found
-    }
-
-    // Update activatedBoard columns
     const updatedColumns = state.activatedBoard.columns.map((column) => {
-      // Find the task and remove it from its current column
       const updatedTasks = column.tasks.filter((t) => t.title !== taskTitle);
 
-      // If this column matches the new status, add the task to it
       if (column.name === status) {
         const updatedTask = state.activatedBoard.columns
           .flatMap((col) => col.tasks)
           .find((t) => t.title === taskTitle);
 
-        // Ensure the task exists and has a valid title before updating
         if (updatedTask && updatedTask.title) {
           return {
             ...column,
@@ -152,7 +138,6 @@ export const taskReducer = createReducer(
         ...state.activatedBoard,
         columns: updatedColumns,
       },
-      // Ensure selectedTask is updated only if it exists and the title matches
       seletedTask:
         state.seletedTask?.title === taskTitle
           ? {
@@ -160,7 +145,6 @@ export const taskReducer = createReducer(
               status,
             }
           : state.seletedTask,
-      // Make sure boards are also updated with the new column structure
       boards: state.boards.map((board) => ({
         ...board,
         columns:
@@ -172,19 +156,15 @@ export const taskReducer = createReducer(
   }),
 
   on(taskActions.addTask, (state, { task }) => {
-    // Find the column that matches the new task status
     const targetColumnIndex = state.activatedBoard.columns.findIndex(
       (column) => column.name === task.status
     );
 
-    // If the column for the new task status is found
     if (targetColumnIndex === -1) {
-      return state; // Or handle the case where the column is not found
+      return state;
     }
 
-    // Update activatedBoard columns
     const updatedColumns = state.activatedBoard.columns.map((column) => {
-      // If this column matches the new task status, add the task to it
       if (column.name === task.status) {
         return {
           ...column,
@@ -201,7 +181,6 @@ export const taskReducer = createReducer(
         ...state.activatedBoard,
         columns: updatedColumns,
       },
-      // Make sure boards are also updated with the new column structure
       boards: state.boards.map((board) => ({
         ...board,
         columns:
