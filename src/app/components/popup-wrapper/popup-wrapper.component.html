@@ -22,9 +22,11 @@
     >
       <app-create-task *ngIf="popupType === 'createTask'"></app-create-task>
       <app-create-board *ngIf="popupType === 'createBoard'"></app-create-board>
+      <!-- <app-create-board *ngIf="popupType === 'addColumn'"></app-create-board> -->
       <app-task-details *ngIf="popupType === 'taskDetails'"></app-task-details>
       <app-delete-board *ngIf="popupType === 'deleteBoard'"></app-delete-board>
       <app-delete-board *ngIf="popupType === 'deleteTask'"></app-delete-board>
+      <app-create-board *ngIf="popupType === 'addColumn'"></app-create-board>
     </div>
   </div>
 </div>

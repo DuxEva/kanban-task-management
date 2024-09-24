@@ -68,7 +68,7 @@ export class NavbarComponent implements OnChanges {
   }
 
   openEditTask() {
-    this.store.dispatch(taskActions.showModel({ showModel: 'editBoard' }));
+    this.store.dispatch(taskActions.showModel({ showModel: 'addColumn' }));
   }
 
   openDeleteTask() {

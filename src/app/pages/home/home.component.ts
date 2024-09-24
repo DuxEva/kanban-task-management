@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
       this.boards = boards;
     });
   }
+
+  addNewColumn() {
+    this.store.dispatch(taskActions.showModel({ showModel: 'addColumn' }));
+  }
 }
