@@ -45,6 +45,31 @@ export const taskReducer = createReducer(
     seletedTask: task,
   })),
 
+  // delete task
+
+  on(taskActions.deleteTask, (state, { task }) => {
+    const updatedColumns = state.activatedBoard.columns.map((column) => ({
+      ...column,
+      tasks: column.tasks.filter((t) => t.title !== task.title),
+    }));
+
+    return {
+      ...state,
+      activatedBoard: {
+        ...state.activatedBoard,
+        columns: updatedColumns,
+      },
+      seletedTask: state.seletedTask?.title === task.title ? { title: '', description: '', status: '', subtasks: [] } : state.seletedTask,
+      boards: state.boards.map((board) => ({
+        ...board,
+        columns:
+          board.name === state.activatedBoard.name
+            ? updatedColumns
+            : board.columns,
+      })),
+    };
+  }),
+
   // update subtask of a task
 
   on(taskActions.updateSubtask, (state, { taskTitle, subTaskTitle }) => ({

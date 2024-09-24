@@ -1,5 +1,5 @@
 <div
-  class="w-full flex flex-col gap-4 p-2"
+  class="w-full flex flex-col gap-4 p-2 relative overflow-x-hidden"
   [formGroup]="taskForm"
   *ngIf="selectedTask$ | async as selectedTask"
 >
@@ -8,7 +8,11 @@
       {{ selectedTask.title }}
     </h2>
 
-    <app-button icon="/assets/icon-vertical-ellipsis.svg" customStyle="" />
+    <app-button
+      (click)="openActions()"
+      icon="/assets/icon-vertical-ellipsis.svg"
+      customStyle=""
+    />
   </div>
   <p class="text-mediumGray dark:text-grey-1">
     {{ selectedTask.description }}
@@ -68,4 +72,27 @@
       </ng-container>
     </select>
   </div>
+
+  <ul
+    [ngClass]="
+      isActionOpened
+        ? 'duration-100 translate-x-0 opacity-100'
+        : 'opacity-0 duration-100 translate-x-64'
+    "
+    class="right-2 -top-5 w-36 py-2 flex flex-col gap-2 absolute z-20 bg-white dark:bg-black-2 mt-20 rounded-xl shadow-lg duration-300 text-black-1 dark:text-white"
+  >
+    <li
+      class="text-sm font-semibold px-4 pr-6 py-3 hover:bg-grey-1 hover:dark:bg-black-3 duration-100 cursor-pointer rounded-md"
+      (click)="openEditTask()"
+    >
+      Edit task
+    </li>
+    <li
+      class="text-sm text-red font-semibold px-4 pr-6 py-3 hover:bg-grey-1 hover:dark:bg-black-3 duration-100 cursor-pointer rounded-md"
+      (click)="openDeleteTask()"
+    >
+      Delete task
+    </li>
+  </ul>
 </div>
+

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState, Board } from '../../models';
+import { AppState, Board, Task } from '../../models';
 import * as taskActions from '../../store/task.actions';
 import * as taskSelectors from '../../store/task.selectors';
 
@@ -10,17 +10,38 @@ import * as taskSelectors from '../../store/task.selectors';
   styleUrl: './deleteboard.component.css',
 })
 export class DeleteboardComponent {
-  board!: Board;
+  @Input() board: Board | undefined;
+  @Input() task: Task | undefined;
+  @Input() showModel: string | undefined;
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.store.select(taskSelectors.selectActivatedBoard).subscribe((board) => {
-      this.board = board;
-    });
+    this.store
+      .select(taskSelectors.selectShowModelState)
+      .subscribe((showModel) => {
+        this.showModel = showModel;
+      });
   }
 
-  deleteBoard() {
-    this.store.dispatch(taskActions.deleteBoard({ board: this.board }));
+  deleteBoardOrTask() {
+    if (this.showModel === 'deleteBoard') {
+      this.store
+        .select(taskSelectors.selectActivatedBoard)
+        .subscribe((board) => {
+          this.board = board;
+        });
+
+      if (!this.board) return;
+      this.store.dispatch(taskActions.deleteBoard({ board: this.board }));
+    } else if (this.showModel === 'deleteTask') {
+      this.store.select(taskSelectors.seletedTask).subscribe((task) => {
+        this.task = task;
+      });
+
+      if (!this.task) return;
+
+      this.store.dispatch(taskActions.deleteTask({ task: this.task }));
+    }
     this.store.dispatch(taskActions.showModel({ showModel: '' }));
   }
 

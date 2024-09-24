@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
   styleUrl: './task-details.component.css',
 })
 export class TaskDetailsComponent implements OnInit {
+  isActionOpened: boolean = false;
+
   taskForm!: FormGroup;
   selectedTask$!: Observable<Task>;
   selectedBoard$!: Observable<Board>;
@@ -43,5 +45,20 @@ export class TaskDetailsComponent implements OnInit {
     this.store.dispatch(
       taskActions.updateSubtask({ taskTitle, subTaskTitle: subtaskTitle })
     );
+  }
+
+  openDeleteTask() {
+    this.store.dispatch(taskActions.showModel({ showModel: 'deleteTask' }));
+    this.isActionOpened = !this.isActionOpened;
+  }
+  openEditTask() {
+    throw new Error('Method not implemented.');
+  }
+  openActions() {
+    this.isActionOpened = !this.isActionOpened;
+  }
+
+  closeModel() {
+    this.store.dispatch(taskActions.showModel({ showModel: '' }));
   }
 }

@@ -50,6 +50,13 @@ export const deleteBoard = createAction(
   props<{ board: Board }>()
 );
 
+// delete task
+
+export const deleteTask = createAction(
+  '[Task] Delete Task',
+  props<{ task: Task }>()
+);
+
 // update subtask of a task
 
 export const updateSubtask = createAction(
