@@ -16,9 +16,6 @@ export class PopupWrapperComponent {
 
   constructor(private store: Store<AppState>) {
     this.popupType$ = this.store.select(taskSelectors.selectShowModelState);
-    this.popupType$.subscribe((showModel) => {
-      console.log(showModel);
-    });
   }
 
   toggleDialogue() {
