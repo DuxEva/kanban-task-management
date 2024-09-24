@@ -24,47 +24,22 @@ export class CreateBoardComponent {
   ngOnInit(): void {
     this.boardForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      columns: this.fb.array([]), // start with an empty array
+      columns: this.fb.array([this.createColumn()]),
     });
 
-    // Subscribe to `showModel`
     this.store
       .pipe(select(taskSelectors.selectShowModelState))
       .subscribe((showModel) => {
         this.showModel = showModel;
-        // Populate form if 'addColumn' mode and selectedBoard has value
-        if (this.showModel === 'addColumn' && this.selectedBoard) {
-          this.populateForm(this.selectedBoard);
-        }
       });
 
-    // Subscribe to selected board
-    this.store
-      .pipe(select(taskSelectors.selectActivatedBoard))
-      .subscribe((board) => {
-        this.selectedBoard = board;
-        if (this.showModel === 'addColumn' && this.selectedBoard) {
-          this.populateForm(this.selectedBoard);
-        }
-      });
-  }
-
-  // Helper method to populate form
-  populateForm(board: Board): void {
-    // Populate name field
-    this.boardForm.patchValue({
-      name: board.name,
-    });
-
-    // Populate columns array
-    const columnFormGroups = board.columns.map((column) =>
-      this.fb.group({
-        name: [column.name, Validators.required],
-        tasks: [column.tasks],
-      })
-    );
-    const columnsFormArray = this.fb.array(columnFormGroups);
-    this.boardForm.setControl('columns', columnsFormArray);
+    if (this.showModel === 'addColumn') {
+      this.store
+        .pipe(select(taskSelectors.selectActivatedBoard))
+        .subscribe((board) => {
+          this.selectedBoard = board;
+        });
+    }
   }
 
   get columns(): FormArray {
