@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { AppState, Board, Subtask, Task } from '../../models';
+import { AppState, Board, Task } from '../../models';
 import * as taskSelectors from '../../store/task.selectors';
 import * as taskActions from '../../store/task.actions';
 import { Observable } from 'rxjs';
@@ -50,9 +50,6 @@ export class TaskDetailsComponent implements OnInit {
   openDeleteTask() {
     this.store.dispatch(taskActions.showModel({ showModel: 'deleteTask' }));
     this.isActionOpened = !this.isActionOpened;
-  }
-  openEditTask() {
-    throw new Error('Method not implemented.');
   }
   openActions() {
     this.isActionOpened = !this.isActionOpened;

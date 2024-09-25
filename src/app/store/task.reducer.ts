@@ -59,7 +59,10 @@ export const taskReducer = createReducer(
         ...state.activatedBoard,
         columns: updatedColumns,
       },
-      seletedTask: state.seletedTask?.title === task.title ? { title: '', description: '', status: '', subtasks: [] } : state.seletedTask,
+      seletedTask:
+        state.seletedTask?.title === task.title
+          ? { title: '', description: '', status: '', subtasks: [] }
+          : state.seletedTask,
       boards: state.boards.map((board) => ({
         ...board,
         columns:

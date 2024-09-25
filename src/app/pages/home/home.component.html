@@ -8,7 +8,6 @@
   <div
     class="flex w-full h-full overflow-x-scroll custom-scroll"
     *ngIf="selectedBoard$ | async as selectedBoard"
-    (click)="addNewColumn()"
   >
     <div
       class="flex flex-col justify-center items-center w-full"
@@ -35,6 +34,7 @@
         [ngClass]="{
           'hidden': !boards.length,
         }"
+        (click)="addNewColumn()"
       >
         <app-button
           text="+ Add New Column"
